@@ -47,19 +47,13 @@ GLfloat gQuadVertexData[] =
 @property (nonatomic) GLKMatrix4 projMatrix;
 
 
-@property (nonatomic) GLKTextureInfo* playerTexture;
-@property (nonatomic) GLKTextureInfo* followerTexture;
+@property (nonatomic) GLKTextureInfo* qTexture;
 
 @property (nonatomic) Player* player;
 @property (nonatomic) NSMutableArray* followers;
 
 - (void)setupGL;
 - (void)tearDownGL;
-
-- (BOOL)loadShaders;
-- (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
-- (BOOL)linkProgram:(GLuint)prog;
-- (BOOL)validateProgram:(GLuint)prog;
 @end
 
 static const int followersNum = 25;
@@ -87,9 +81,8 @@ static const int followersNum = 25;
     _player = [[Player alloc] initWith:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2) size:CGSizeMake(65, 65)];
     _player.visible = false;
     // TODO: error checking
-    _playerTexture = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"squla_player" ofType:@"png"] options:nil error:nil];
+    _qTexture = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Q" ofType:@"png"] options:nil error:nil];
     
-    const CGPoint followerPos = CGPointMake(0, 0);
     const CGSize followerSize = CGSizeMake(20, 20);
     _followers = [[NSMutableArray alloc] initWithCapacity:followersNum];
     for(int i = 0; i < followersNum; i++)
@@ -109,8 +102,6 @@ static const int followersNum = 25;
         follower.allFollowers = _followers;
         [_followers addObject:follower];
     }
-    // TODO: error checking
-    _followerTexture = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"squla_q" ofType:@"png"] options:nil error:nil];
 }
 
 - (void)dealloc
@@ -184,6 +175,7 @@ static const int followersNum = 25;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [_player touchBegan:[[touches anyObject] locationInView:self.view]];
+    
     if(!_player.visible)
     {
         _player.position = [[touches anyObject] locationInView:self.view];
@@ -226,10 +218,11 @@ static const int followersNum = 25;
     glBindVertexArrayOES(_vertexArray);
     glUseProgram(_program);
     
-    // Draw followers.
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(_followerTexture.target, _followerTexture.name);
+    glBindTexture(_qTexture.target, _qTexture.name);
     glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
+    
+    // Draw followers.
     for(Follower* follower in _followers)
     {
         if(follower.visible)
@@ -245,11 +238,6 @@ static const int followersNum = 25;
     {
         GLKMatrix4 wvpMatrix = GLKMatrix4Multiply(_projMatrix, _player.wvMatrix);
         glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);
-        
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(_playerTexture.target, _playerTexture.name);
-        glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
-        
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
 
