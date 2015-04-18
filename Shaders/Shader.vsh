@@ -1,14 +1,12 @@
 attribute vec2 position;
 
-varying lowp vec4 colorVarying;
+varying lowp vec2 texCoords;
 
 uniform mat4 modelViewProjectionMatrix;
 
 void main()
 {
-    vec4 diffuseColor = vec4(0.4, 0.4, 1.0, 1.0);
-
-    colorVarying = diffuseColor;
+    texCoords = (position + 1.0) * 0.5;
     
     gl_Position = modelViewProjectionMatrix * vec4(position, 0.0, 1.0);
 }
