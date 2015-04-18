@@ -11,6 +11,11 @@
 		06165FE91AE05A06004C5F84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06165FE81AE05A06004C5F84 /* AppDelegate.m */; };
 		06165FEC1AE05A06004C5F84 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06165FEB1AE05A06004C5F84 /* ViewController.m */; };
 		06165FF11AE05A06004C5F84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06165FF01AE05A06004C5F84 /* Images.xcassets */; };
+		0616600C1AE06195004C5F84 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0616600A1AE06195004C5F84 /* Shader.fsh */; };
+		0616600D1AE06195004C5F84 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0616600B1AE06195004C5F84 /* Shader.vsh */; };
+		061A03C91AE24FB100F0DA75 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03C81AE24FB100F0DA75 /* Sprite.m */; };
+		061A03CC1AE2567100F0DA75 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03CB1AE2567100F0DA75 /* Player.m */; };
+		061A03D01AE2719500F0DA75 /* squla_q.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03CF1AE2719500F0DA75 /* squla_q.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,13 @@
 		06165FEA1AE05A06004C5F84 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		06165FEB1AE05A06004C5F84 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		06165FF01AE05A06004C5F84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0616600A1AE06195004C5F84 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		0616600B1AE06195004C5F84 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		061A03C71AE24FB100F0DA75 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		061A03C81AE24FB100F0DA75 /* Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sprite.m; sourceTree = "<group>"; };
+		061A03CA1AE2567100F0DA75 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		061A03CB1AE2567100F0DA75 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		061A03CF1AE2719500F0DA75 /* squla_q.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squla_q.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +50,8 @@
 		06165FD71AE05A06004C5F84 = {
 			isa = PBXGroup;
 			children = (
+				061A03CF1AE2719500F0DA75 /* squla_q.png */,
+				061660091AE06195004C5F84 /* Shaders */,
 				06165FE21AE05A06004C5F84 /* flocking */,
 				06165FE11AE05A06004C5F84 /* Products */,
 			);
@@ -58,6 +72,10 @@
 				06165FE81AE05A06004C5F84 /* AppDelegate.m */,
 				06165FEA1AE05A06004C5F84 /* ViewController.h */,
 				06165FEB1AE05A06004C5F84 /* ViewController.m */,
+				061A03C71AE24FB100F0DA75 /* Sprite.h */,
+				061A03C81AE24FB100F0DA75 /* Sprite.m */,
+				061A03CA1AE2567100F0DA75 /* Player.h */,
+				061A03CB1AE2567100F0DA75 /* Player.m */,
 				06165FF01AE05A06004C5F84 /* Images.xcassets */,
 				06165FE31AE05A06004C5F84 /* Supporting Files */,
 			);
@@ -71,6 +89,15 @@
 				06165FE51AE05A06004C5F84 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		061660091AE06195004C5F84 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				0616600A1AE06195004C5F84 /* Shader.fsh */,
+				0616600B1AE06195004C5F84 /* Shader.vsh */,
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +157,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0616600C1AE06195004C5F84 /* Shader.fsh in Resources */,
+				061A03D01AE2719500F0DA75 /* squla_q.png in Resources */,
 				06165FF11AE05A06004C5F84 /* Images.xcassets in Resources */,
+				0616600D1AE06195004C5F84 /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +173,9 @@
 			files = (
 				06165FEC1AE05A06004C5F84 /* ViewController.m in Sources */,
 				06165FE91AE05A06004C5F84 /* AppDelegate.m in Sources */,
+				061A03C91AE24FB100F0DA75 /* Sprite.m in Sources */,
 				06165FE61AE05A06004C5F84 /* main.m in Sources */,
+				061A03CC1AE2567100F0DA75 /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +303,7 @@
 				061660051AE05A06004C5F84 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

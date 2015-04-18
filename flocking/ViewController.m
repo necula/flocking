@@ -1,4 +1,5 @@
 #import "ViewController.h"
+#import "Player.h"
 #import <OpenGLES/ES2/glext.h>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -7,6 +8,7 @@
 enum
 {
     UNIFORM_MODELVIEWPROJECTION_MATRIX,
+    UNIFORM_TEXTURE,
     NUM_UNIFORMS
 };
 GLint uniforms[NUM_UNIFORMS];
@@ -20,13 +22,15 @@ enum
 
 GLfloat gQuadVertexData[] =
 {
+    1.f,-1.f,
+    -1.f,-1.f,
+    -1.f, 1.f,
+    
     -1.f, 1.f,
     1.f, 1.f,
     1.f,-1.f,
     
-    1.f,-1.f,
-    -1.f,-1.f,
-    -1.f, 1.f
+    
 };
 
 @interface ViewController () {
@@ -40,6 +44,12 @@ GLfloat gQuadVertexData[] =
     GLuint _vertexBuffer;
 }
 @property (strong, nonatomic) EAGLContext *context;
+@property (nonatomic) GLKMatrix4 projMatrix;
+
+
+@property (nonatomic) GLKTextureInfo* playerTexture;
+
+@property (nonatomic) Player* player;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -66,7 +76,14 @@ GLfloat gQuadVertexData[] =
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
+    self.preferredFramesPerSecond = 60;
+    
     [self setupGL];
+    
+    _player = [[Player alloc] initWith:CGPointMake(512, 384) size:CGSizeMake(40, 40)];
+    NSString* texPath = [[NSBundle mainBundle] pathForResource:@"squla_q" ofType:@"png"];
+    // TODO: error checking
+    _playerTexture = [GLKTextureLoader textureWithContentsOfFile:texPath options:nil error:nil];
 }
 
 - (void)dealloc
@@ -134,27 +151,31 @@ GLfloat gQuadVertexData[] =
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    [_player touchBegan:[[touches anyObject] locationInView:self.view]];
+}
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_player touchMoved:[[touches anyObject] locationInView:self.view]];
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_player touchEnded:[[touches anyObject] locationInView:self.view]];
+}
+
+-(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [_player touchCancelled:[[touches anyObject] locationInView:self.view]];
 }
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update
 {
-    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
+    _projMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.width, self.view.bounds.size.height, 0, -1, 1);
     
-    GLKMatrix4 orthoMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.width, self.view.bounds.size.height, 0, -1, 1);
-    
-    GLKMatrix4 projectionMatrix = orthoMatrix;//GLKMatrix4Multiply(orthoMatrix, lookAtMatrix);
-    
-    // Compute the model view matrix for the object rendered with ES2
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(100.0f, 100.0f, 0.0f);
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 0.0f, 0.0f, 1.0f);
-    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, 50, 50, 1);
-    
-    _modelViewProjectionMatrix = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
-    
-    _rotation += self.timeSinceLastUpdate * 1.5f;
+    [_player update:self.timeSinceLastUpdate];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -164,8 +185,13 @@ GLfloat gQuadVertexData[] =
     
     glBindVertexArrayOES(_vertexArray);
     glUseProgram(_program);
+        
+    GLKMatrix4 wvpMatrix = GLKMatrix4Multiply(_projMatrix, _player.wvMatrix);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);
     
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(_playerTexture.target, _playerTexture.name);
+    glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
@@ -226,6 +252,7 @@ GLfloat gQuadVertexData[] =
     
     // Get uniform locations.
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
+    uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(_program, "tex");
     
     // Release vertex and fragment shaders.
     if (vertShader) {
