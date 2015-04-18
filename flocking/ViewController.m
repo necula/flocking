@@ -1,6 +1,7 @@
 #import "ViewController.h"
 #import "Player.h"
 #import "Follower.h"
+#import "Utils.h"
 #import <OpenGLES/ES2/glext.h>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -60,7 +61,7 @@ GLfloat gQuadVertexData[] =
 - (BOOL)validateProgram:(GLuint)prog;
 @end
 
-static const int followersNum = 10;
+static const int followersNum = 25;
 
 @implementation ViewController
 
@@ -82,21 +83,29 @@ static const int followersNum = 10;
     
     [self setupGL];
     
-    _player = [[Player alloc] initWith:CGPointMake(512, 384) size:CGSizeMake(75, 75)];
+    _player = [[Player alloc] initWith:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2) size:CGSizeMake(65, 65)];
+    _player.visible = false;
     // TODO: error checking
     _playerTexture = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"squla_player" ofType:@"png"] options:nil error:nil];
     
-    const CGPoint followerPos = CGPointMake(100, 100);
+    const CGPoint followerPos = CGPointMake(0, 0);
     const CGSize followerSize = CGSizeMake(20, 20);
     _followers = [[NSMutableArray alloc] initWithCapacity:followersNum];
     for(int i = 0; i < followersNum; i++)
     {
+        CGPoint followerPos = CGPointMake(foo4random() * self.view.bounds.size.width, foo4random() * self.view.bounds.size.height);
         Follower* follower = [[Follower alloc] initWith:followerPos size:followerSize];
         if(i == 0)
+        {
+            follower.leader = true;
             follower.target = _player;
+        }
         else
-            follower.target = (Sprite*)[_followers lastObject];
-
+        {
+            follower.leader = true;
+            follower.target = _player;//(Sprite*)[_followers lastObject];
+        }
+        follower.allFollowers = _followers;
         [_followers addObject:follower];
     }
     // TODO: error checking
@@ -169,6 +178,11 @@ static const int followersNum = 10;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [_player touchBegan:[[touches anyObject] locationInView:self.view]];
+    if(!_player.visible)
+    {
+        _player.position = [[touches anyObject] locationInView:self.view];
+        _player.visible = true;
+    }
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -212,12 +226,16 @@ static const int followersNum = 10;
     glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
     for(Follower* follower in _followers)
     {
-        GLKMatrix4 wvpMatrix = GLKMatrix4Multiply(_projMatrix, follower.wvMatrix);
-        glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        if(follower.visible)
+        {
+            GLKMatrix4 wvpMatrix = GLKMatrix4Multiply(_projMatrix, follower.wvMatrix);
+            glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+        }
     }
     
     // Draw player.
+    if(_player.visible)
     {
         GLKMatrix4 wvpMatrix = GLKMatrix4Multiply(_projMatrix, _player.wvMatrix);
         glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);

@@ -2,9 +2,11 @@
 
 @interface Follower : Sprite
 
+@property (nonatomic) bool leader;
 @property (nonatomic) Sprite* target;
+@property (nonatomic, weak) NSArray* allFollowers;
 
--(instancetype)initWithTarget:(Sprite*)target;
+@property (nonatomic) CGPoint heading;
 
 -(void)update:(float)dt;
 

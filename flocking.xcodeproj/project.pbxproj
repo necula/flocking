@@ -16,6 +16,9 @@
 		061A03C91AE24FB100F0DA75 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03C81AE24FB100F0DA75 /* Sprite.m */; };
 		061A03CC1AE2567100F0DA75 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03CB1AE2567100F0DA75 /* Player.m */; };
 		061A03D01AE2719500F0DA75 /* squla_q.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03CF1AE2719500F0DA75 /* squla_q.png */; };
+		061A03D21AE2755400F0DA75 /* squla_player.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03D11AE2755400F0DA75 /* squla_player.png */; };
+		061A03D51AE27A1D00F0DA75 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D41AE27A1D00F0DA75 /* Follower.m */; };
+		061A03D71AE2830E00F0DA75 /* Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D61AE2830E00F0DA75 /* Utils.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,10 @@
 		061A03CA1AE2567100F0DA75 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		061A03CB1AE2567100F0DA75 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		061A03CF1AE2719500F0DA75 /* squla_q.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squla_q.png; sourceTree = "<group>"; };
+		061A03D11AE2755400F0DA75 /* squla_player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squla_player.png; sourceTree = "<group>"; };
+		061A03D31AE27A1D00F0DA75 /* Follower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follower.h; sourceTree = "<group>"; };
+		061A03D41AE27A1D00F0DA75 /* Follower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follower.m; sourceTree = "<group>"; };
+		061A03D61AE2830E00F0DA75 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +57,7 @@
 		06165FD71AE05A06004C5F84 = {
 			isa = PBXGroup;
 			children = (
+				061A03D11AE2755400F0DA75 /* squla_player.png */,
 				061A03CF1AE2719500F0DA75 /* squla_q.png */,
 				061660091AE06195004C5F84 /* Shaders */,
 				06165FE21AE05A06004C5F84 /* flocking */,
@@ -76,6 +84,9 @@
 				061A03C81AE24FB100F0DA75 /* Sprite.m */,
 				061A03CA1AE2567100F0DA75 /* Player.h */,
 				061A03CB1AE2567100F0DA75 /* Player.m */,
+				061A03D31AE27A1D00F0DA75 /* Follower.h */,
+				061A03D41AE27A1D00F0DA75 /* Follower.m */,
+				061A03D61AE2830E00F0DA75 /* Utils.h */,
 				06165FF01AE05A06004C5F84 /* Images.xcassets */,
 				06165FE31AE05A06004C5F84 /* Supporting Files */,
 			);
@@ -158,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0616600C1AE06195004C5F84 /* Shader.fsh in Resources */,
+				061A03D21AE2755400F0DA75 /* squla_player.png in Resources */,
 				061A03D01AE2719500F0DA75 /* squla_q.png in Resources */,
 				06165FF11AE05A06004C5F84 /* Images.xcassets in Resources */,
 				0616600D1AE06195004C5F84 /* Shader.vsh in Resources */,
@@ -176,6 +188,8 @@
 				061A03C91AE24FB100F0DA75 /* Sprite.m in Sources */,
 				06165FE61AE05A06004C5F84 /* main.m in Sources */,
 				061A03CC1AE2567100F0DA75 /* Player.m in Sources */,
+				061A03D71AE2830E00F0DA75 /* Utils.h in Sources */,
+				061A03D51AE27A1D00F0DA75 /* Follower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
     _position = position;
     _size = size;
     _wvMatrix = GLKMatrix4Identity;
+    _visible = YES;
     
     return self;
 }

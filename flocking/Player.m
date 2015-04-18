@@ -10,7 +10,7 @@
 
 - (void)touchBegan:(CGPoint)touchPoint
 {
-    if(![self containsPoint:touchPoint])
+    if(!self.visible || ![self containsPoint:touchPoint])
         return;
     
     _touchActive = YES;
@@ -21,6 +21,7 @@
 {
     if(_touchActive)
     {
+        _touchMoving = true;
         CGPoint delta = CGPointMake(touchPoint.x - _lastTouchPoint.x, touchPoint.y - _lastTouchPoint.y);
         [self translateRelative:delta];
         _lastTouchPoint = touchPoint;
@@ -29,12 +30,17 @@
 
 - (void)touchEnded:(CGPoint)touchPoint
 {
+    if(_touchActive && !_touchMoving && [self containsPoint:touchPoint])
+        self.visible = false;
+    
     _touchActive = false;
+    _touchMoving = false;
 }
 
 - (void)touchCancelled:(CGPoint)touchPoint
 {
     _touchActive = false;
+    _touchMoving = false;
 }
 
 -(BOOL)containsPoint:(CGPoint)point
