@@ -1,5 +1,6 @@
 #import "ViewController.h"
 #import "Player.h"
+#import "Follower.h"
 #import <OpenGLES/ES2/glext.h>
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
@@ -25,12 +26,9 @@ GLfloat gQuadVertexData[] =
     1.f,-1.f,
     -1.f,-1.f,
     -1.f, 1.f,
-    
     -1.f, 1.f,
     1.f, 1.f,
     1.f,-1.f,
-    
-    
 };
 
 @interface ViewController () {
@@ -48,8 +46,10 @@ GLfloat gQuadVertexData[] =
 
 
 @property (nonatomic) GLKTextureInfo* playerTexture;
+@property (nonatomic) GLKTextureInfo* followerTexture;
 
 @property (nonatomic) Player* player;
+@property (nonatomic) NSMutableArray* followers;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -59,6 +59,8 @@ GLfloat gQuadVertexData[] =
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
 @end
+
+static const int followersNum = 10;
 
 @implementation ViewController
 
@@ -80,10 +82,25 @@ GLfloat gQuadVertexData[] =
     
     [self setupGL];
     
-    _player = [[Player alloc] initWith:CGPointMake(512, 384) size:CGSizeMake(40, 40)];
-    NSString* texPath = [[NSBundle mainBundle] pathForResource:@"squla_q" ofType:@"png"];
+    _player = [[Player alloc] initWith:CGPointMake(512, 384) size:CGSizeMake(75, 75)];
     // TODO: error checking
-    _playerTexture = [GLKTextureLoader textureWithContentsOfFile:texPath options:nil error:nil];
+    _playerTexture = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"squla_player" ofType:@"png"] options:nil error:nil];
+    
+    const CGPoint followerPos = CGPointMake(100, 100);
+    const CGSize followerSize = CGSizeMake(20, 20);
+    _followers = [[NSMutableArray alloc] initWithCapacity:followersNum];
+    for(int i = 0; i < followersNum; i++)
+    {
+        Follower* follower = [[Follower alloc] initWith:followerPos size:followerSize];
+        if(i == 0)
+            follower.target = _player;
+        else
+            follower.target = (Sprite*)[_followers lastObject];
+
+        [_followers addObject:follower];
+    }
+    // TODO: error checking
+    _followerTexture = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"squla_q" ofType:@"png"] options:nil error:nil];
 }
 
 - (void)dealloc
@@ -176,24 +193,42 @@ GLfloat gQuadVertexData[] =
     _projMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.width, self.view.bounds.size.height, 0, -1, 1);
     
     [_player update:self.timeSinceLastUpdate];
+    
+    for(Follower* follower in _followers)
+        [follower update:self.timeSinceLastUpdate];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
+    glClearColor(66/255.f, 43/255.f, 132/255.f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glBindVertexArrayOES(_vertexArray);
     glUseProgram(_program);
-        
-    GLKMatrix4 wvpMatrix = GLKMatrix4Multiply(_projMatrix, _player.wvMatrix);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);
     
+    // Draw followers.
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(_playerTexture.target, _playerTexture.name);
+    glBindTexture(_followerTexture.target, _followerTexture.name);
     glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
+    for(Follower* follower in _followers)
+    {
+        GLKMatrix4 wvpMatrix = GLKMatrix4Multiply(_projMatrix, follower.wvMatrix);
+        glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+    }
     
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+    // Draw player.
+    {
+        GLKMatrix4 wvpMatrix = GLKMatrix4Multiply(_projMatrix, _player.wvMatrix);
+        glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);
+        
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(_playerTexture.target, _playerTexture.name);
+        glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
+        
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+    }
+
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
