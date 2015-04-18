@@ -19,6 +19,7 @@
 		061A03D21AE2755400F0DA75 /* squla_player.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03D11AE2755400F0DA75 /* squla_player.png */; };
 		061A03D51AE27A1D00F0DA75 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D41AE27A1D00F0DA75 /* Follower.m */; };
 		061A03D71AE2830E00F0DA75 /* Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D61AE2830E00F0DA75 /* Utils.h */; };
+		061A03D91AE306DC00F0DA75 /* ShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D81AE306DC00F0DA75 /* ShaderUtils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		061A03D31AE27A1D00F0DA75 /* Follower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follower.h; sourceTree = "<group>"; };
 		061A03D41AE27A1D00F0DA75 /* Follower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follower.m; sourceTree = "<group>"; };
 		061A03D61AE2830E00F0DA75 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		061A03D81AE306DC00F0DA75 /* ShaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderUtils.m; sourceTree = "<group>"; };
+		061A03DA1AE306E700F0DA75 /* ShaderUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderUtils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,8 @@
 				061A03D31AE27A1D00F0DA75 /* Follower.h */,
 				061A03D41AE27A1D00F0DA75 /* Follower.m */,
 				061A03D61AE2830E00F0DA75 /* Utils.h */,
+				061A03D81AE306DC00F0DA75 /* ShaderUtils.m */,
+				061A03DA1AE306E700F0DA75 /* ShaderUtils.h */,
 				06165FF01AE05A06004C5F84 /* Images.xcassets */,
 				06165FE31AE05A06004C5F84 /* Supporting Files */,
 			);
@@ -183,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				061A03D91AE306DC00F0DA75 /* ShaderUtils.m in Sources */,
 				06165FEC1AE05A06004C5F84 /* ViewController.m in Sources */,
 				06165FE91AE05A06004C5F84 /* AppDelegate.m in Sources */,
 				061A03C91AE24FB100F0DA75 /* Sprite.m in Sources */,
