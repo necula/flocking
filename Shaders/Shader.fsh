@@ -1,5 +1,5 @@
-varying lowp vec4 colorVarying;
 varying lowp vec2 texCoords;
+
 uniform sampler2D tex;
 
 void main()
