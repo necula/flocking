@@ -107,8 +107,6 @@ float g_sceneScale;
         }
         self.context = nil;
     }
-    
-    _qTexture = nil;
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -197,7 +195,7 @@ float g_sceneScale;
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     glClearColor(122/255.f, 171/255.f, 183/255.f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     
     glBindVertexArrayOES(_vertexArray);
     glUseProgram(_program);
@@ -224,7 +222,6 @@ float g_sceneScale;
         glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, wvpMatrix.m);
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
-
 }
 
 @end
