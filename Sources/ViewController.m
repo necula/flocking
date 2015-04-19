@@ -196,7 +196,7 @@ float g_sceneScale;
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
-    glClearColor(66/255.f, 43/255.f, 132/255.f, 1.0f);
+    glClearColor(122/255.f, 171/255.f, 183/255.f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     glBindVertexArrayOES(_vertexArray);
