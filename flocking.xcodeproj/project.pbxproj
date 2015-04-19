@@ -7,43 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06165FE61AE05A06004C5F84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06165FE51AE05A06004C5F84 /* main.m */; };
-		06165FE91AE05A06004C5F84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06165FE81AE05A06004C5F84 /* AppDelegate.m */; };
-		06165FEC1AE05A06004C5F84 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06165FEB1AE05A06004C5F84 /* ViewController.m */; };
-		06165FF11AE05A06004C5F84 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06165FF01AE05A06004C5F84 /* Images.xcassets */; };
-		0616600C1AE06195004C5F84 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0616600A1AE06195004C5F84 /* Shader.fsh */; };
-		0616600D1AE06195004C5F84 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0616600B1AE06195004C5F84 /* Shader.vsh */; };
-		061A03C91AE24FB100F0DA75 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03C81AE24FB100F0DA75 /* Sprite.m */; };
-		061A03CC1AE2567100F0DA75 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03CB1AE2567100F0DA75 /* Player.m */; };
-		061A03D01AE2719500F0DA75 /* Q.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03CF1AE2719500F0DA75 /* Q.png */; };
-		061A03D51AE27A1D00F0DA75 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D41AE27A1D00F0DA75 /* Follower.m */; };
-		061A03D71AE2830E00F0DA75 /* MathUtils.h in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D61AE2830E00F0DA75 /* MathUtils.h */; };
-		061A03D91AE306DC00F0DA75 /* ShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D81AE306DC00F0DA75 /* ShaderUtils.m */; };
-		061A03DC1AE31E5900F0DA75 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03DB1AE31E5900F0DA75 /* Default-568h@2x.png */; };
+		061A03EE1AE3CF6B00F0DA75 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03E01AE3CF6B00F0DA75 /* AppDelegate.m */; };
+		061A03EF1AE3CF6B00F0DA75 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03E21AE3CF6B00F0DA75 /* Follower.m */; };
+		061A03F11AE3CF6B00F0DA75 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03E41AE3CF6B00F0DA75 /* main.m */; };
+		061A03F21AE3CF6B00F0DA75 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03E71AE3CF6B00F0DA75 /* Player.m */; };
+		061A03F31AE3CF6B00F0DA75 /* ShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03E91AE3CF6B00F0DA75 /* ShaderUtils.m */; };
+		061A03F41AE3CF6B00F0DA75 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03EB1AE3CF6B00F0DA75 /* Sprite.m */; };
+		061A03F51AE3CF6B00F0DA75 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03ED1AE3CF6B00F0DA75 /* ViewController.m */; };
+		061A03F91AE3D05600F0DA75 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03F71AE3D05600F0DA75 /* Default-568h@2x.png */; };
+		061A03FA1AE3D05600F0DA75 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 061A03F81AE3D05600F0DA75 /* Images.xcassets */; };
+		061A04011AE3D05B00F0DA75 /* Q.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03FD1AE3D05B00F0DA75 /* Q.png */; };
+		061A04021AE3D05B00F0DA75 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 061A03FF1AE3D05B00F0DA75 /* Shader.fsh */; };
+		061A04031AE3D05B00F0DA75 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 061A04001AE3D05B00F0DA75 /* Shader.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		06165FE01AE05A06004C5F84 /* flocking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flocking.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		06165FE41AE05A06004C5F84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		06165FE51AE05A06004C5F84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		06165FE71AE05A06004C5F84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		06165FE81AE05A06004C5F84 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		06165FEA1AE05A06004C5F84 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		06165FEB1AE05A06004C5F84 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		06165FF01AE05A06004C5F84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0616600A1AE06195004C5F84 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
-		0616600B1AE06195004C5F84 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
-		061A03C71AE24FB100F0DA75 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
-		061A03C81AE24FB100F0DA75 /* Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sprite.m; sourceTree = "<group>"; };
-		061A03CA1AE2567100F0DA75 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
-		061A03CB1AE2567100F0DA75 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
-		061A03CF1AE2719500F0DA75 /* Q.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Q.png; sourceTree = "<group>"; };
-		061A03D31AE27A1D00F0DA75 /* Follower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follower.h; sourceTree = "<group>"; };
-		061A03D41AE27A1D00F0DA75 /* Follower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follower.m; sourceTree = "<group>"; };
-		061A03D61AE2830E00F0DA75 /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtils.h; sourceTree = "<group>"; };
-		061A03D81AE306DC00F0DA75 /* ShaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderUtils.m; sourceTree = "<group>"; };
-		061A03DA1AE306E700F0DA75 /* ShaderUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderUtils.h; sourceTree = "<group>"; };
-		061A03DB1AE31E5900F0DA75 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		061A03DF1AE3CF6B00F0DA75 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		061A03E01AE3CF6B00F0DA75 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		061A03E11AE3CF6B00F0DA75 /* Follower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follower.h; sourceTree = "<group>"; };
+		061A03E21AE3CF6B00F0DA75 /* Follower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follower.m; sourceTree = "<group>"; };
+		061A03E41AE3CF6B00F0DA75 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		061A03E51AE3CF6B00F0DA75 /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtils.h; sourceTree = "<group>"; };
+		061A03E61AE3CF6B00F0DA75 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		061A03E71AE3CF6B00F0DA75 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		061A03E81AE3CF6B00F0DA75 /* ShaderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderUtils.h; sourceTree = "<group>"; };
+		061A03E91AE3CF6B00F0DA75 /* ShaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderUtils.m; sourceTree = "<group>"; };
+		061A03EA1AE3CF6B00F0DA75 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		061A03EB1AE3CF6B00F0DA75 /* Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sprite.m; sourceTree = "<group>"; };
+		061A03EC1AE3CF6B00F0DA75 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		061A03ED1AE3CF6B00F0DA75 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		061A03F71AE3D05600F0DA75 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		061A03F81AE3D05600F0DA75 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		061A03FD1AE3D05B00F0DA75 /* Q.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Q.png; sourceTree = "<group>"; };
+		061A03FF1AE3D05B00F0DA75 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		061A04001AE3D05B00F0DA75 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,9 +58,10 @@
 		06165FD71AE05A06004C5F84 = {
 			isa = PBXGroup;
 			children = (
-				06165FE21AE05A06004C5F84 /* flocking */,
+				061A03FB1AE3D05B00F0DA75 /* Data */,
+				061A03F61AE3D05600F0DA75 /* Resources */,
+				061A03DE1AE3CF6B00F0DA75 /* Sources */,
 				06165FE11AE05A06004C5F84 /* Products */,
-				061A03DD1AE3C96A00F0DA75 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -74,55 +73,60 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		06165FE21AE05A06004C5F84 /* flocking */ = {
+		061A03DE1AE3CF6B00F0DA75 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				061660091AE06195004C5F84 /* Shaders */,
-				06165FE71AE05A06004C5F84 /* AppDelegate.h */,
-				06165FE81AE05A06004C5F84 /* AppDelegate.m */,
-				06165FEA1AE05A06004C5F84 /* ViewController.h */,
-				06165FEB1AE05A06004C5F84 /* ViewController.m */,
-				061A03C71AE24FB100F0DA75 /* Sprite.h */,
-				061A03C81AE24FB100F0DA75 /* Sprite.m */,
-				061A03CA1AE2567100F0DA75 /* Player.h */,
-				061A03CB1AE2567100F0DA75 /* Player.m */,
-				061A03D31AE27A1D00F0DA75 /* Follower.h */,
-				061A03D41AE27A1D00F0DA75 /* Follower.m */,
-				061A03D61AE2830E00F0DA75 /* MathUtils.h */,
-				061A03D81AE306DC00F0DA75 /* ShaderUtils.m */,
-				061A03DA1AE306E700F0DA75 /* ShaderUtils.h */,
-				06165FF01AE05A06004C5F84 /* Images.xcassets */,
-				06165FE31AE05A06004C5F84 /* Supporting Files */,
+				061A03DF1AE3CF6B00F0DA75 /* AppDelegate.h */,
+				061A03E01AE3CF6B00F0DA75 /* AppDelegate.m */,
+				061A03E11AE3CF6B00F0DA75 /* Follower.h */,
+				061A03E21AE3CF6B00F0DA75 /* Follower.m */,
+				061A03E41AE3CF6B00F0DA75 /* main.m */,
+				061A03E51AE3CF6B00F0DA75 /* MathUtils.h */,
+				061A03E61AE3CF6B00F0DA75 /* Player.h */,
+				061A03E71AE3CF6B00F0DA75 /* Player.m */,
+				061A03E81AE3CF6B00F0DA75 /* ShaderUtils.h */,
+				061A03E91AE3CF6B00F0DA75 /* ShaderUtils.m */,
+				061A03EA1AE3CF6B00F0DA75 /* Sprite.h */,
+				061A03EB1AE3CF6B00F0DA75 /* Sprite.m */,
+				061A03EC1AE3CF6B00F0DA75 /* ViewController.h */,
+				061A03ED1AE3CF6B00F0DA75 /* ViewController.m */,
 			);
-			path = flocking;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		06165FE31AE05A06004C5F84 /* Supporting Files */ = {
+		061A03F61AE3D05600F0DA75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				06165FE41AE05A06004C5F84 /* Info.plist */,
-				06165FE51AE05A06004C5F84 /* main.m */,
+				061A03F71AE3D05600F0DA75 /* Default-568h@2x.png */,
+				061A03F81AE3D05600F0DA75 /* Images.xcassets */,
 			);
-			name = "Supporting Files";
+			path = Resources;
 			sourceTree = "<group>";
 		};
-		061660091AE06195004C5F84 /* Shaders */ = {
+		061A03FB1AE3D05B00F0DA75 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0616600A1AE06195004C5F84 /* Shader.fsh */,
-				0616600B1AE06195004C5F84 /* Shader.vsh */,
+				061A03FC1AE3D05B00F0DA75 /* Images */,
+				061A03FE1AE3D05B00F0DA75 /* Shaders */,
 			);
-			name = Shaders;
-			path = ../Shaders;
+			path = Data;
 			sourceTree = "<group>";
 		};
-		061A03DD1AE3C96A00F0DA75 /* Resources */ = {
+		061A03FC1AE3D05B00F0DA75 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				061A03DB1AE31E5900F0DA75 /* Default-568h@2x.png */,
-				061A03CF1AE2719500F0DA75 /* Q.png */,
+				061A03FD1AE3D05B00F0DA75 /* Q.png */,
 			);
-			name = Resources;
+			path = Images;
+			sourceTree = "<group>";
+		};
+		061A03FE1AE3D05B00F0DA75 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				061A03FF1AE3D05B00F0DA75 /* Shader.fsh */,
+				061A04001AE3D05B00F0DA75 /* Shader.vsh */,
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,11 +186,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0616600C1AE06195004C5F84 /* Shader.fsh in Resources */,
-				061A03D01AE2719500F0DA75 /* Q.png in Resources */,
-				06165FF11AE05A06004C5F84 /* Images.xcassets in Resources */,
-				061A03DC1AE31E5900F0DA75 /* Default-568h@2x.png in Resources */,
-				0616600D1AE06195004C5F84 /* Shader.vsh in Resources */,
+				061A04021AE3D05B00F0DA75 /* Shader.fsh in Resources */,
+				061A04011AE3D05B00F0DA75 /* Q.png in Resources */,
+				061A03F91AE3D05600F0DA75 /* Default-568h@2x.png in Resources */,
+				061A03FA1AE3D05600F0DA75 /* Images.xcassets in Resources */,
+				061A04031AE3D05B00F0DA75 /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,14 +201,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				061A03D91AE306DC00F0DA75 /* ShaderUtils.m in Sources */,
-				06165FEC1AE05A06004C5F84 /* ViewController.m in Sources */,
-				06165FE91AE05A06004C5F84 /* AppDelegate.m in Sources */,
-				061A03C91AE24FB100F0DA75 /* Sprite.m in Sources */,
-				06165FE61AE05A06004C5F84 /* main.m in Sources */,
-				061A03CC1AE2567100F0DA75 /* Player.m in Sources */,
-				061A03D71AE2830E00F0DA75 /* MathUtils.h in Sources */,
-				061A03D51AE27A1D00F0DA75 /* Follower.m in Sources */,
+				061A03F51AE3CF6B00F0DA75 /* ViewController.m in Sources */,
+				061A03F31AE3CF6B00F0DA75 /* ShaderUtils.m in Sources */,
+				061A03F21AE3CF6B00F0DA75 /* Player.m in Sources */,
+				061A03F41AE3CF6B00F0DA75 /* Sprite.m in Sources */,
+				061A03EE1AE3CF6B00F0DA75 /* AppDelegate.m in Sources */,
+				061A03F11AE3CF6B00F0DA75 /* main.m in Sources */,
+				061A03EF1AE3CF6B00F0DA75 /* Follower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
