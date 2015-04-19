@@ -70,7 +70,7 @@ float g_sceneScale;
     g_sceneScale = g_screenSize.height / 768.f;
     
     _player = [[Player alloc] initWith:CGPointMake(g_screenSize.width/2, g_screenSize.height/2) size:CGSizeMake(g_sceneScale * PLAYER_SIZE, g_sceneScale * PLAYER_SIZE)];
-    _player.visible = false;
+    _player.visible = true;
     
     const CGSize followerSize = CGSizeMake(g_sceneScale * FOLLOWER_SIZE, g_sceneScale * FOLLOWER_SIZE);
     _followers = [[NSMutableArray alloc] initWithCapacity:FOLLOWERS_NUM];
