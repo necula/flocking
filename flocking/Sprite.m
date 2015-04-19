@@ -16,11 +16,6 @@
     return self;
 }
 
--(instancetype)init
-{
-    return [self initWith:CGPointMake(0.f, 0.f) size:CGSizeMake(100.f, 100.f)];
-}
-
 -(void)update:(float)dt
 {
     [self updateMatrix];

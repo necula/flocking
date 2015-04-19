@@ -17,8 +17,9 @@
 		061A03CC1AE2567100F0DA75 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03CB1AE2567100F0DA75 /* Player.m */; };
 		061A03D01AE2719500F0DA75 /* Q.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03CF1AE2719500F0DA75 /* Q.png */; };
 		061A03D51AE27A1D00F0DA75 /* Follower.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D41AE27A1D00F0DA75 /* Follower.m */; };
-		061A03D71AE2830E00F0DA75 /* Utils.h in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D61AE2830E00F0DA75 /* Utils.h */; };
+		061A03D71AE2830E00F0DA75 /* MathUtils.h in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D61AE2830E00F0DA75 /* MathUtils.h */; };
 		061A03D91AE306DC00F0DA75 /* ShaderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 061A03D81AE306DC00F0DA75 /* ShaderUtils.m */; };
+		061A03DC1AE31E5900F0DA75 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 061A03DB1AE31E5900F0DA75 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,9 +40,10 @@
 		061A03CF1AE2719500F0DA75 /* Q.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Q.png; sourceTree = "<group>"; };
 		061A03D31AE27A1D00F0DA75 /* Follower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Follower.h; sourceTree = "<group>"; };
 		061A03D41AE27A1D00F0DA75 /* Follower.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Follower.m; sourceTree = "<group>"; };
-		061A03D61AE2830E00F0DA75 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		061A03D61AE2830E00F0DA75 /* MathUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathUtils.h; sourceTree = "<group>"; };
 		061A03D81AE306DC00F0DA75 /* ShaderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShaderUtils.m; sourceTree = "<group>"; };
 		061A03DA1AE306E700F0DA75 /* ShaderUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderUtils.h; sourceTree = "<group>"; };
+		061A03DB1AE31E5900F0DA75 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +60,9 @@
 		06165FD71AE05A06004C5F84 = {
 			isa = PBXGroup;
 			children = (
-				061A03CF1AE2719500F0DA75 /* Q.png */,
-				061660091AE06195004C5F84 /* Shaders */,
 				06165FE21AE05A06004C5F84 /* flocking */,
 				06165FE11AE05A06004C5F84 /* Products */,
+				061A03DD1AE3C96A00F0DA75 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +77,7 @@
 		06165FE21AE05A06004C5F84 /* flocking */ = {
 			isa = PBXGroup;
 			children = (
+				061660091AE06195004C5F84 /* Shaders */,
 				06165FE71AE05A06004C5F84 /* AppDelegate.h */,
 				06165FE81AE05A06004C5F84 /* AppDelegate.m */,
 				06165FEA1AE05A06004C5F84 /* ViewController.h */,
@@ -86,7 +88,7 @@
 				061A03CB1AE2567100F0DA75 /* Player.m */,
 				061A03D31AE27A1D00F0DA75 /* Follower.h */,
 				061A03D41AE27A1D00F0DA75 /* Follower.m */,
-				061A03D61AE2830E00F0DA75 /* Utils.h */,
+				061A03D61AE2830E00F0DA75 /* MathUtils.h */,
 				061A03D81AE306DC00F0DA75 /* ShaderUtils.m */,
 				061A03DA1AE306E700F0DA75 /* ShaderUtils.h */,
 				06165FF01AE05A06004C5F84 /* Images.xcassets */,
@@ -110,7 +112,17 @@
 				0616600A1AE06195004C5F84 /* Shader.fsh */,
 				0616600B1AE06195004C5F84 /* Shader.vsh */,
 			);
-			path = Shaders;
+			name = Shaders;
+			path = ../Shaders;
+			sourceTree = "<group>";
+		};
+		061A03DD1AE3C96A00F0DA75 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				061A03DB1AE31E5900F0DA75 /* Default-568h@2x.png */,
+				061A03CF1AE2719500F0DA75 /* Q.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,6 +185,7 @@
 				0616600C1AE06195004C5F84 /* Shader.fsh in Resources */,
 				061A03D01AE2719500F0DA75 /* Q.png in Resources */,
 				06165FF11AE05A06004C5F84 /* Images.xcassets in Resources */,
+				061A03DC1AE31E5900F0DA75 /* Default-568h@2x.png in Resources */,
 				0616600D1AE06195004C5F84 /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,7 +203,7 @@
 				061A03C91AE24FB100F0DA75 /* Sprite.m in Sources */,
 				06165FE61AE05A06004C5F84 /* main.m in Sources */,
 				061A03CC1AE2567100F0DA75 /* Player.m in Sources */,
-				061A03D71AE2830E00F0DA75 /* Utils.h in Sources */,
+				061A03D71AE2830E00F0DA75 /* MathUtils.h in Sources */,
 				061A03D51AE27A1D00F0DA75 /* Follower.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

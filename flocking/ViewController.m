@@ -1,7 +1,7 @@
 #import "ViewController.h"
 #import "Player.h"
 #import "Follower.h"
-#import "Utils.h"
+#import "MathUtils.h"
 #import "ShaderUtils.h"
 #import <OpenGLES/ES2/glext.h>
 
@@ -25,38 +25,21 @@ enum
 
 GLfloat gQuadVertexData[] =
 {
-    1.f,-1.f,
+     1.f,-1.f,
     -1.f,-1.f,
     -1.f, 1.f,
     -1.f, 1.f,
-    1.f, 1.f,
-    1.f,-1.f,
+     1.f, 1.f,
+     1.f,-1.f,
 };
 
-@interface ViewController () {
-    GLuint _program;
-    
-    GLKMatrix4 _modelViewProjectionMatrix;
-    GLKMatrix3 _normalMatrix;
-    float _rotation;
-    
-    GLuint _vertexArray;
-    GLuint _vertexBuffer;
-}
-@property (strong, nonatomic) EAGLContext *context;
-@property (nonatomic) GLKMatrix4 projMatrix;
+static const int FOLLOWERS_NUM = 25;
 
+static const int PLAYER_SIZE = 65;
+static const int FOLLOWER_SIZE = 20;
 
-@property (nonatomic) GLKTextureInfo* qTexture;
-
-@property (nonatomic) Player* player;
-@property (nonatomic) NSMutableArray* followers;
-
-- (void)setupGL;
-- (void)tearDownGL;
-@end
-
-static const int followersNum = 25;
+CGSize g_screenSize;
+float g_sceneScale;
 
 @implementation ViewController
 
@@ -72,33 +55,30 @@ static const int followersNum = 25;
     
     GLKView *view = (GLKView *)self.view;
     view.context = self.context;
-    view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     self.preferredFramesPerSecond = 60;
     
     [self setupGL];
     
-    _player = [[Player alloc] initWith:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2) size:CGSizeMake(65, 65)];
-    _player.visible = false;
-    // TODO: error checking
-    _qTexture = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Q" ofType:@"png"] options:nil error:nil];
-    
-    const CGSize followerSize = CGSizeMake(20, 20);
-    _followers = [[NSMutableArray alloc] initWithCapacity:followersNum];
-    for(int i = 0; i < followersNum; i++)
+    g_screenSize = self.view.bounds.size;
+    if(g_screenSize.width < g_screenSize.height)
     {
-        CGPoint followerPos = CGPointMake(foo4random() * self.view.bounds.size.width, foo4random() * self.view.bounds.size.height);
+        g_screenSize.width = self.view.bounds.size.height;
+        g_screenSize.height = self.view.bounds.size.width;
+    }
+    
+    g_sceneScale = g_screenSize.height / 768.f;
+    
+    _player = [[Player alloc] initWith:CGPointMake(g_screenSize.width/2, g_screenSize.height/2) size:CGSizeMake(g_sceneScale * PLAYER_SIZE, g_sceneScale * PLAYER_SIZE)];
+    _player.visible = false;
+    
+    const CGSize followerSize = CGSizeMake(g_sceneScale * FOLLOWER_SIZE, g_sceneScale * FOLLOWER_SIZE);
+    _followers = [[NSMutableArray alloc] initWithCapacity:FOLLOWERS_NUM];
+    for(int i = 0; i < FOLLOWERS_NUM; i++)
+    {
+        CGPoint followerPos = CGPointMake((rand()/(float)RAND_MAX) * self.view.bounds.size.width, (rand()/(float)RAND_MAX) * self.view.bounds.size.height);
         Follower* follower = [[Follower alloc] initWith:followerPos size:followerSize];
-        if(i == 0)
-        {
-            follower.leader = true;
-            follower.target = _player;
-        }
-        else
-        {
-            follower.leader = true;
-            follower.target = _player;//(Sprite*)[_followers lastObject];
-        }
+        follower.target = _player;
         follower.allFollowers = _followers;
         [_followers addObject:follower];
     }
@@ -128,7 +108,7 @@ static const int followersNum = 25;
         self.context = nil;
     }
     
-    // Dispose of any resources that can be recreated.
+    _qTexture = nil;
 }
 
 - (BOOL)prefersStatusBarHidden {
@@ -142,6 +122,8 @@ static const int followersNum = 25;
     _program = [ShaderUtils loadShaders:@"Shader"];
     if(!_program)
         return;
+    
+    _qTexture = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Q" ofType:@"png"] options:nil error:nil];
     
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
     uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(_program, "tex");
@@ -170,6 +152,8 @@ static const int followersNum = 25;
         glDeleteProgram(_program);
         _program = 0;
     }
+    
+    _qTexture = nil;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -242,7 +226,5 @@ static const int followersNum = 25;
     }
 
 }
-
-#pragma mark -  OpenGL ES 2 shader compilation
 
 @end

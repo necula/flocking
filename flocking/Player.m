@@ -1,7 +1,12 @@
 #import "Player.h"
 
-@implementation Player
+@interface Player ()
+    @property (nonatomic) bool touchActive;
+    @property (nonatomic) bool touchMoving;
+    @property (nonatomic) CGPoint lastTouchPoint;
+@end
 
+@implementation Player
 
 -(void)update:(float)dt
 {
@@ -30,6 +35,7 @@
 
 - (void)touchEnded:(CGPoint)touchPoint
 {
+    // Check if it's a tap gesture.
     if(_touchActive && !_touchMoving && [self containsPoint:touchPoint])
         self.visible = false;
     

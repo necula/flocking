@@ -8,7 +8,6 @@
 @property (nonatomic) GLKMatrix4    wvMatrix;
 @property (nonatomic) BOOL          visible;
 
--(instancetype)init;
 -(instancetype)initWith:(CGPoint)position size:(CGSize)size;
 
 -(void)update:(float)dt;

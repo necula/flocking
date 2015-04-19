@@ -1,23 +1,27 @@
+#import "ViewController.h"
 #import "Follower.h"
-#import "Utils.h"
+#import "MathUtils.h"
 
-#define TARGET_MIN_DISTANCE 100.f // pixels
-#define SEPARATION_DISTANCE 50.f
-#define SIGHT_DISTANCE 150.f
-
-static const float MAX_SPEED = 150.f; // pixels/s
-static const float TARGET_AVOIDANCE_MAX_SPEED = 350.f; // pixels/s
-
-static const float SEPARATION_DISTANCE_SQ = SEPARATION_DISTANCE * SEPARATION_DISTANCE;
-static const float SIGHT_DISTANCE_SQ = SIGHT_DISTANCE * SIGHT_DISTANCE;
-static const float TARGET_MIN_DISTANCE_SQ = TARGET_MIN_DISTANCE * TARGET_MIN_DISTANCE;
+static const float TARGET_MIN_DISTANCE = 100.f; // Points.
+static const float SEPARATION_DISTANCE = 50.f; // Points.
+static const float SIGHT_DISTANCE = 150.f; // Points.
 
 static const float TARGET_AVOIDANCE_WEIGHT = 50.f;
-static const float TARGET_ALIGNMENT_WEIGHT = 0.2f;
+static const float TARGET_CHASE_WEIGHT = 0.2f;
 
 static const float SEPARATION_WEIGHT = 5.f;
 static const float COHESION_WEIGHT = 0.04f;
 static const float ALIGNMENT_WEIGHT = 0.0f;
+
+@interface Follower ()
+
+@property (nonatomic) float SEPARATION_DISTANCE_SQ;
+@property (nonatomic) float SIGHT_DISTANCE_SQ;
+@property (nonatomic) float TARGET_MIN_DISTANCE_SQ;
+@property (nonatomic) float TARGET_AVOIDANCE_MAX_SPEED; // Points/sec.
+@property (nonatomic) float TARGET_CHASE_MAX_SPEED; // Points/sec.
+
+@end
 
 @implementation Follower
 
@@ -26,75 +30,72 @@ static const float ALIGNMENT_WEIGHT = 0.0f;
     self = [super initWith:position size:size];
     if(!self)
         return nil;
+
+    const float sceneScaleSq = (g_sceneScale*g_sceneScale);
+    _TARGET_MIN_DISTANCE_SQ = TARGET_MIN_DISTANCE*TARGET_MIN_DISTANCE * sceneScaleSq;
+    _SEPARATION_DISTANCE_SQ = SEPARATION_DISTANCE*SEPARATION_DISTANCE * sceneScaleSq;
+    _SIGHT_DISTANCE_SQ = SIGHT_DISTANCE*SIGHT_DISTANCE * sceneScaleSq;
     
-    float angle = rand() * 2.f * M_PI;
-    float speed = rand() * (MAX_SPEED-50.f) + 50.f;
-    _heading = CGPointMake(cosf(angle) * speed, sinf(angle) * speed);
+    _TARGET_CHASE_MAX_SPEED = 150.f * g_sceneScale;
+    _TARGET_AVOIDANCE_MAX_SPEED = 350.f * g_sceneScale;
+    
+    const float angle = (rand()/(float)RAND_MAX) * 2.f * M_PI;
+    const float speed = (rand()/(float)RAND_MAX) * (_TARGET_CHASE_MAX_SPEED-50.f) + 50.f;
+    _velocity = CGPointMake(cosf(angle) * speed, sinf(angle) * speed);
     
     return self;
 }
 
 -(void)update:(float)dt
 {
-    int closeFollowers = 0;
-    CGPoint averageAlignment = CGPointMake(0.f, 0.f);
     for(Follower* follower in _allFollowers)
     {
         if(follower != self)
         {
             float distToFollowerSq = DistSq(self.position, follower.position);
-            if(distToFollowerSq < SEPARATION_DISTANCE_SQ) // separation
+            if(distToFollowerSq < _SEPARATION_DISTANCE_SQ) // Separation.
             {
-                _heading.x += (self.position.x - follower.position.x) * SEPARATION_WEIGHT;
-                _heading.y += (self.position.y - follower.position.y) * SEPARATION_WEIGHT;
+                _velocity.x += (self.position.x - follower.position.x) * SEPARATION_WEIGHT;
+                _velocity.y += (self.position.y - follower.position.y) * SEPARATION_WEIGHT;
             }
-            else if((_target && _target.visible) && distToFollowerSq < SIGHT_DISTANCE_SQ) // cohesion
+            else if((_target && _target.visible) && distToFollowerSq < _SIGHT_DISTANCE_SQ) // Cohesion.
             {
-                _heading.x += (follower.position.x - self.position.x) * COHESION_WEIGHT;
-                _heading.y += (follower.position.y - self.position.y) * COHESION_WEIGHT;
+                _velocity.x += (follower.position.x - self.position.x) * COHESION_WEIGHT;
+                _velocity.y += (follower.position.y - self.position.y) * COHESION_WEIGHT;
             }
-            if((_target && _target.visible) && distToFollowerSq < SIGHT_DISTANCE_SQ) // alignment
+            if((_target && _target.visible) && distToFollowerSq < _SIGHT_DISTANCE_SQ) // Alignment.
             {
-                closeFollowers++;
-                averageAlignment.x += follower.heading.x;
-                averageAlignment.y += follower.heading.y;
+                _velocity.x += follower.velocity.x * ALIGNMENT_WEIGHT;
+                _velocity.y += follower.velocity.y * ALIGNMENT_WEIGHT;
             }
         }
-    }
-    
-    if(closeFollowers > 0)
-    {
-        _heading.x += (averageAlignment.x/closeFollowers) * ALIGNMENT_WEIGHT;
-        _heading.y += (averageAlignment.y/closeFollowers) * ALIGNMENT_WEIGHT;
     }
     
     if(_target && _target.visible)
     {
         float distSq = DistSq(self.position, _target.position);
-        if(_leader && distSq > TARGET_MIN_DISTANCE_SQ)
+        if(distSq > _TARGET_MIN_DISTANCE_SQ)
         {
-            _heading.x += (_target.position.x - self.position.x) * TARGET_ALIGNMENT_WEIGHT;
-            _heading.y += (_target.position.y - self.position.y) * TARGET_ALIGNMENT_WEIGHT;
+            _velocity.x += (_target.position.x - self.position.x) * TARGET_CHASE_WEIGHT;
+            _velocity.y += (_target.position.y - self.position.y) * TARGET_CHASE_WEIGHT;
         }
     }
     
-    _heading = [self resizeVector:_heading toLength:MAX_SPEED];
+    _velocity = ResizeToLength(_velocity, _TARGET_CHASE_MAX_SPEED);
     
     if(_target && _target.visible)
     {
+        // Followers should get out of the target's way at a greater speed (TARGET_AVOIDANCE_MAX_SPEED > TARGET_CHASE_MAX_SPEED).
         float distSq = DistSq(self.position, _target.position);
-        if(distSq < TARGET_MIN_DISTANCE_SQ)
+        if(distSq < _TARGET_MIN_DISTANCE_SQ)
         {
-            _heading.x += (self.position.x - _target.position.x)  * TARGET_AVOIDANCE_WEIGHT;
-            _heading.y += (self.position.y - _target.position.y)  * TARGET_AVOIDANCE_WEIGHT;
-            _heading = [self resizeVector:_heading toLength:TARGET_AVOIDANCE_MAX_SPEED];
+            _velocity.x += (self.position.x - _target.position.x)  * TARGET_AVOIDANCE_WEIGHT;
+            _velocity.y += (self.position.y - _target.position.y)  * TARGET_AVOIDANCE_WEIGHT;
+            _velocity = ResizeToLength(_velocity, _TARGET_AVOIDANCE_MAX_SPEED);
         }
     }
     
-    CGPoint position = self.position;
-    position.x += _heading.x * dt;
-    position.y += _heading.y * dt;
-    self.position = position;
+    [self translateRelative:CGPointMake(_velocity.x*dt, _velocity.y*dt)];
     
     [self checkBoundaries];
     
@@ -104,24 +105,13 @@ static const float ALIGNMENT_WEIGHT = 0.0f;
 -(void)checkBoundaries
 {
     if(self.position.x < 0)
-        self.position = CGPointMake(1024, self.position.y);
-    else if(self.position.x > 1024)
+        self.position = CGPointMake(g_screenSize.width, self.position.y);
+    else if(self.position.x > g_screenSize.width)
         self.position = CGPointMake(0, self.position.y);
     if(self.position.y < 0)
-        self.position = CGPointMake(self.position.x, 768);
-    else if(self.position.y > 768)
+        self.position = CGPointMake(self.position.x, g_screenSize.height);
+    else if(self.position.y > g_screenSize.height)
         self.position = CGPointMake(self.position.x, 0);
-}
-
--(CGPoint)resizeVector:(CGPoint)vector toLength:(float)newLength
-{
-    float currentLength = Length(vector);
-    if(currentLength > newLength)
-    {
-        vector.x = vector.x * (newLength/currentLength);
-        vector.y = vector.y * (newLength/currentLength);
-    }
-    return vector;
 }
 
 @end
